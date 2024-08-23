@@ -8,6 +8,14 @@ const equalsButton = document.querySelector<HTMLButtonElement>("#equals");
 const operators = ["/", "*", "-", "+"];
 
 
+// validation check for display:
+
+if (!display) {
+    throw new Error("Display element not found");
+}
+
+
+
 // Click events for calculator buttons:
 
 const registerClick = (event: Event) => {
