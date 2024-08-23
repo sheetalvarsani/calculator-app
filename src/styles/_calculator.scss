@@ -8,11 +8,13 @@
     // input tag (num display)
     &__display {
         max-height: 100px;
-        width: 100%;
+        width: 95%;
         border: none;
         text-align: right;
         background-color: whitesmoke;
         margin-bottom: 10px;
         font-size: 30px;
+        padding-right: 5%;
+        font-weight: 200;
     }
 }
