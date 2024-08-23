@@ -1,0 +1,40 @@
+.calculator {
+
+    // display buttons in a grid with 4 in each row
+    &__buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    &__button {
+
+        border-radius: 8px;
+        border: 9px solid transparent;
+        margin: 1px;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        background-color: rgb(105, 166, 170);
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: tan;
+        }
+
+        &:active {
+            transform: scale(0.9);
+            background-color: lightgray;
+        }
+
+        // '0' button takes up more of row:
+        &--double-width {
+            grid-column-end: span 2;
+        }
+
+        &--operator {
+            color: black;
+        }
+    }
+}
