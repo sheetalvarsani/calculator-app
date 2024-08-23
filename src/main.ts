@@ -59,29 +59,42 @@ const evaluateExpression = (expression: string): number => {
     const numbers: number[] = [];
     const ops: string[] = [];
     let currentNumber = "";
+    let isNegative = false; // to be able to use negative numbers
 
-    // Iterate through each character:
-    for (const char of expression) {
-        if ((char >= "0" && char <= "9") || char === ".") {
+    // Iterate through each character
+    for (let i = 0; i < expression.length; i++) {
+        const char = expression[i];
+
+        if (char >= "0" && char <= "9" || char === ".") {
             // Append digit or decimal point to the current number
             currentNumber += char;
-        } else if (
-            char === "+" ||
-            char === "-" ||
-            char === "*" ||
-            char === "/"
-        ) {
-            // When an operator is encountered, push the current number and the operator to the respective arrays
+        } else if (char === "+" || char === "-" || char === "*" || char === "/") {
             if (currentNumber) {
-                numbers.push(parseFloat(currentNumber)); // For decimal numbers (parseFloat)
+                // Handle the case where the current number is negative
+                if (isNegative) {
+                    numbers.push(-parseFloat(currentNumber)); // Apply negative sign
+                } else {
+                    numbers.push(parseFloat(currentNumber));
+                }
                 currentNumber = "";
+                isNegative = false; // Reset negative flag
             }
-            ops.push(char);
+
+            // Handle negative numbers at the beginning or after an operator
+            if (char === "-" && (i === 0 || operators.includes(expression[i - 1]))) {
+                isNegative = true; // Set flag for negative number
+            } else {
+                ops.push(char); // Push operator
+            }
         }
     }
 
     if (currentNumber) {
-        numbers.push(parseFloat(currentNumber));
+        if (isNegative) {
+            numbers.push(-parseFloat(currentNumber)); // negative numbers
+        } else {
+            numbers.push(parseFloat(currentNumber));
+        }
     }
 
     // Evaluate mathenatical expression depending on operator:
