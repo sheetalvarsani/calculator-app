@@ -36,6 +36,9 @@ const registerClick = (event: Event) => {
         }
         return;
     }
+    
+        // Shows value to display:
+        display.value += value;
 };
 
 
