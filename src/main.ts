@@ -4,9 +4,6 @@ const buttons = document.querySelectorAll<HTMLButtonElement>(
     ".calculator__button"
 );
 const display = document.querySelector<HTMLInputElement>("#display");
-const clearButton = document.querySelector<HTMLButtonElement>("#clear");
-const deleteButton = document.querySelector<HTMLButtonElement>("#delete");
-const equalsButton = document.querySelector<HTMLButtonElement>("#equals");
 const operators = ["/", "*", "-", "+"];
 
 // validation check for display:
