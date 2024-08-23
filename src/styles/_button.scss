@@ -8,13 +8,12 @@
     }
 
     &__button {
-
         border-radius: 8px;
         border: 9px solid transparent;
         margin: 1px;
         padding: 0.6em 1.2em;
         font-size: 1em;
-        font-weight: 500;
+        font-weight: 600;
         background-color: rgb(105, 166, 170);
         color: white;
         cursor: pointer;
@@ -28,7 +27,7 @@
             background-color: lightgray;
         }
 
-        // '0' button takes up more of row:
+        // '0' and 'AC' buttons take up more of row:
         &--double-width {
             grid-column-end: span 2;
         }
