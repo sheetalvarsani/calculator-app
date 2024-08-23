@@ -44,6 +44,10 @@ const registerClick = (event: Event) => {
         return;
     }
 
+        // Prevent multiple decimal points or multiple operators being used in a row:
+        if (value === '.' && display.value.includes('.')) return;
+        if (operators.includes(value) && operators.includes(display.value.slice(-1))) return;
+
     // Shows value to display:
     display.value += value;
 };
@@ -72,7 +76,6 @@ const evaluateExpression = (expression: string): number => {
                 numbers.push(parseFloat(currentNumber)); // For decimal numbers (parseFloat)
                 currentNumber = "";
             }
-
             ops.push(char);
         }
     }
