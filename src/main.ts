@@ -1,16 +1,25 @@
 import "./styles/styles.css";
 
-const buttons = document.querySelectorAll<HTMLButtonElement>(
-    ".calculator__button"
-);
+// DOM element queries:
+
+const buttons = document.querySelectorAll<HTMLButtonElement>(".calculator__button");
 const display = document.querySelector<HTMLInputElement>("#display");
 const operators = ["/", "*", "-", "+"];
 
-// validation check for display:
+
+// check display element exists:
 
 if (!display) {
     throw new Error("Display element not found");
 }
+
+// Helper function to handle adding numbers to array:
+const addNumberToArray = (currentNumber: string, numbers: number[], isNegative: boolean) => {
+    if (currentNumber) {
+        numbers.push(isNegative ? -parseFloat(currentNumber) : parseFloat(currentNumber));
+    }
+};
+
 
 // Click events for calculator buttons:
 
@@ -41,16 +50,25 @@ const registerClick = (event: Event) => {
         return;
     }
 
-        // Prevent multiple decimal points or multiple operators being used in a row:
-        if (value === '.' && display.value.includes('.')) return;
-        if (operators.includes(value) && operators.includes(display.value.slice(-1))) return;
+    // Prevent multiple decimal points or multiple operators being used in a row:
+    if (value === "." && display.value.includes(".")) return;
+    if (
+        operators.includes(value) &&
+        operators.includes(display.value.slice(-1))
+    )
+        return;
 
     // Shows value to display:
     display.value += value;
 };
 
-// Event listeners for all buttons:
+
+// Event listener for all buttons:
+
 buttons.forEach((button) => button.addEventListener("click", registerClick));
+
+
+// Mathematical expressions:
 
 const evaluateExpression = (expression: string): number => {
     const numbers: number[] = [];
@@ -62,37 +80,24 @@ const evaluateExpression = (expression: string): number => {
     for (let i = 0; i < expression.length; i++) {
         const char = expression[i];
 
-        if (char >= "0" && char <= "9" || char === ".") {
-            // Append digit or decimal point to the current number
+        if ((char >= "0" && char <= "9") || char === ".") {
+            
             currentNumber += char;
-        } else if (char === "+" || char === "-" || char === "*" || char === "/") {
-            if (currentNumber) {
-                // Handle the case where the current number is negative
-                if (isNegative) {
-                    numbers.push(-parseFloat(currentNumber)); // Apply negative sign
-                } else {
-                    numbers.push(parseFloat(currentNumber));
-                }
-                currentNumber = "";
-                isNegative = false; // Reset negative flag
-            }
+        } else if (operators.includes(char)) {
+            addNumberToArray(currentNumber, numbers, isNegative);
+            currentNumber = "";
+            isNegative = false;
 
-            // Handle negative numbers at the beginning or after an operator
+            // For negative numbers:
             if (char === "-" && (i === 0 || operators.includes(expression[i - 1]))) {
-                isNegative = true; // Set flag for negative number
+                isNegative = true;
             } else {
-                ops.push(char); // Push operator
+                ops.push(char);
             }
         }
     }
 
-    if (currentNumber) {
-        if (isNegative) {
-            numbers.push(-parseFloat(currentNumber)); // negative numbers
-        } else {
-            numbers.push(parseFloat(currentNumber));
-        }
-    }
+    addNumberToArray(currentNumber, numbers, isNegative);
 
     // Evaluate mathenatical expression depending on operator:
     let result = numbers[0];
