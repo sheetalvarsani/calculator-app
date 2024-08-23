@@ -1,0 +1,28 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lemonchiffon;
+}
+body h1 {
+  margin-bottom: 2rem;
+}
+
+.calculator {
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.calculator__display {
+  max-height: 100px;
+  width: 100%;
+  border: none;
+  text-align: right;
+  background-color: whitesmoke;
+  margin-bottom: 10px;
+  font-size: 30px;
+}/*# sourceMappingURL=styles.css.map */

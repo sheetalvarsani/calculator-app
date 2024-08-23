@@ -1,0 +1,14 @@
+// where calculator sits (middle of the screen)
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: lemonchiffon;
+
+    h1 {
+        margin-bottom: 2rem;
+    }
+}
