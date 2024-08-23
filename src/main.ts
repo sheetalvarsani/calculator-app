@@ -1,20 +1,19 @@
-import './styles/styles.css';
+import "./styles/styles.css";
 
-const buttons = document.querySelectorAll<HTMLButtonElement>(".calculator__button");
+const buttons = document.querySelectorAll<HTMLButtonElement>(
+    ".calculator__button"
+);
 const display = document.querySelector<HTMLInputElement>("#display");
 const clearButton = document.querySelector<HTMLButtonElement>("#clear");
 const deleteButton = document.querySelector<HTMLButtonElement>("#delete");
 const equalsButton = document.querySelector<HTMLButtonElement>("#equals");
 const operators = ["/", "*", "-", "+"];
 
-
 // validation check for display:
 
 if (!display) {
     throw new Error("Display element not found");
 }
-
-
 
 // Click events for calculator buttons:
 
@@ -23,32 +22,31 @@ const registerClick = (event: Event) => {
     const value = target.innerText;
 
     // 'AC' button (clear display):
-    if (value === 'AC') {
-        display.value = '';
+    if (value === "AC") {
+        display.value = "";
         return;
     }
 
     // 'DEL' button (delete last character):
-    if (value === 'DEL') {
+    if (value === "DEL") {
         display.value = display.value.slice(0, -1);
         return;
     }
 
     // '=' button:
-    if (value === '=') {
+    if (value === "=") {
         try {
             const result = evaluateExpression(display.value);
             display.value = result.toString();
         } catch (error) {
-            display.value = 'Error';
+            display.value = "Error";
         }
         return;
     }
-    
-        // Shows value to display:
-        display.value += value;
-};
 
+    // Shows value to display:
+    display.value += value;
+};
 
 // Event listeners for all buttons:
 buttons.forEach((button) => button.addEventListener("click", registerClick));
@@ -56,16 +54,31 @@ buttons.forEach((button) => button.addEventListener("click", registerClick));
 const evaluateExpression = (expression: string): number => {
     const numbers: number[] = [];
     const ops: string[] = [];
-    let currentNumber = '';
+    let currentNumber = "";
 
     // Iterate through each character:
     for (const char of expression) {
-        if (char >= '0' && char <= '9' || char === '.') {
+        if ((char >= "0" && char <= "9") || char === ".") {
             // Append digit or decimal point to the current number
             currentNumber += char;
-        } else if (char === '+' || char === '-' || char === '*' || char === '/') {
+        } else if (
+            char === "+" ||
+            char === "-" ||
+            char === "*" ||
+            char === "/"
+        ) {
+            // When an operator is encountered, push the current number and the operator to the respective arrays
+            if (currentNumber) {
+                numbers.push(parseFloat(currentNumber)); // For decimal numbers (parseFloat)
+                currentNumber = "";
+            }
+
             ops.push(char);
         }
+    }
+
+    if (currentNumber) {
+        numbers.push(parseFloat(currentNumber));
     }
 
     // Evaluate mathenatical expression depending on operator:
@@ -87,7 +100,7 @@ const evaluateExpression = (expression: string): number => {
                 result /= num;
                 break;
             default:
-                throw new Error('Not a valid operation');
+                throw new Error("Not a valid operation");
         }
     }
 
