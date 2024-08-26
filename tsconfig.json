@@ -5,7 +5,6 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "types": ["./src/vite-env.d.ts"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,5 +19,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/main.ts"]
+  "include": ["src"]
 }
