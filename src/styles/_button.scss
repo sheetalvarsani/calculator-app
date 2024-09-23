@@ -1,6 +1,4 @@
 .calculator {
-
-    // display buttons in a grid with 4 in each row
     &__buttons {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -27,7 +25,6 @@
             background-color: lightgray;
         }
 
-        // '0' and 'AC' buttons take up more of row:
         &--double-width {
             grid-column-end: span 2;
         }
