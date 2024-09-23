@@ -5,7 +5,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(253, 251, 232);
+  background-color: #96bbbb;
 }
 body h1 {
   margin-bottom: 2rem;
@@ -15,7 +15,7 @@ body h1 {
   max-width: 400px;
   padding: 20px;
   border-radius: 10px;
-  background-color: white;
+  background-color: #414535;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 .calculator__display {
@@ -42,7 +42,7 @@ body h1 {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 600;
-  background-color: rgb(105, 166, 170);
+  background-color: #a97c73;
   color: white;
   cursor: pointer;
 }
